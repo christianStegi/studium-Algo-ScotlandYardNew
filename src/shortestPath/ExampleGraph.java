@@ -109,8 +109,8 @@ public class ExampleGraph {
 		System.out.println("\nA-Star:");
 		ShortestPath<Integer> spAStar = new ShortestPath<Integer>(g, heuristic);
 		spAStar.searchShortestPath(3, 6);
-//		System.out.print("Shortest Path = " + spAStar.getShortestPath());
-//		System.out.println(" Distance = " + spAStar.getDistance());
+		System.out.print("Shortest Path = " + spAStar.getShortestPath());
+		System.out.println(" Distance = " + spAStar.getDistance());
 		// A-Star:
 		// Besuche Knoten 3 mit d = 0.0
 		// Besuche Knoten 4 mit d = 4.0
