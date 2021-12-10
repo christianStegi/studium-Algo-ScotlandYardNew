@@ -3,7 +3,8 @@ package shortestPath;
 import java.io.FileNotFoundException;
 
 import shortestPath.directedGraph.*;
-import sim.SYSimulation;
+import SYSimulation.SYSimulation.src.sim.SYSimulation;
+import SYSimulation.SYSimulation.src.sim.SYDemo;
 import java.awt.Color;
 import java.io.IOException;
 

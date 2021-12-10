@@ -4,6 +4,7 @@
 package shortestPath;
 //package scotlandYard_2021;
 
+import SYSimulation.SYSimulation.src.sim.SYSimulation;
 import shortestPath.directedGraph.*;
 //import SYSimulation.SYSimulation.sim.*;
 
@@ -19,7 +20,7 @@ import java.util.*;
  */
 public class ShortestPath<V> {
 	
-	//SYSimulation sim = null;
+	SYSimulation sim = null;
 	
 	Map<V,Double> dist; 		// Distanz für jeden Knoten
 	Map<V,V> pred; 				// Vorgänger für jeden Knoten
@@ -64,9 +65,9 @@ public class ShortestPath<V> {
 	 * </pre></blockquote>
 	 * @param sim SYSimulation-Objekt.
 	 */
-//	public void setSimulator(SYSimulation sim) {
-//		this.sim = sim;
-//	}
+	public void setSimulator(SYSimulation sim) {
+		this.sim = sim;
+	}
 
 	/**
 	 * Sucht den kürzesten Weg von Starknoten s zum Zielknoten g.

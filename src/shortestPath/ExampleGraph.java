@@ -1,7 +1,5 @@
 package shortestPath;
 
-//import directedGraph
-
 import shortestPath.directedGraph.*;
 
 import java.io.FileNotFoundException;
@@ -119,5 +117,13 @@ public class ExampleGraph {
 		// Besuche Knoten 8 mit d = 11.47213595499958
 		// Besuche Knoten 6 mit d = 15.07768723046357
 		// Shortest Path = [3, 7, 8, 6] Distance = 15.07768723046357
+
+		/* TODO
+		*   Ausgabe korrigieren: Shortest Path (SearchShortestPath-Funktion) soll Ausgaben wie in main() erzeugen
+		*
+		*	dazu vermutlich dijkstra und astern methoden beide in eine Funktion bringen
+		* 		also nur die distanz-unterschiede (blaue Zeilen in der Folie) unterschiedlich zuweisen.
+		*
+		*/
 	}	
 }
