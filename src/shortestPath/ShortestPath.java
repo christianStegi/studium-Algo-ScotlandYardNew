@@ -31,6 +31,7 @@ public class ShortestPath<V> {
 	V startNode;
 	V endNode;
 
+
 	/**
 	 * Konstruiert ein Objekt, das im Graph g kürzeste Wege
 	 * nach dem A*-Verfahren berechnen kann.
@@ -48,10 +49,8 @@ public class ShortestPath<V> {
 		// ...
 		this.graph = g;
 		this.heur = h;
-
-
-
 	}
+
 
 	/**
 	 * Diese Methode sollte nur verwendet werden, 
@@ -68,6 +67,7 @@ public class ShortestPath<V> {
 	public void setSimulator(SYSimulation sim) {
 		this.sim = sim;
 	}
+
 
 	/**
 	 * Sucht den kürzesten Weg von Starknoten s zum Zielknoten g.
@@ -90,6 +90,7 @@ public class ShortestPath<V> {
 
 	}
 
+
 	/**
 	 * Liefert einen kürzesten Weg von Startknoten s nach Zielknoten g.
 	 * Setzt eine erfolgreiche Suche von searchShortestPath(s,g) voraus.
@@ -97,20 +98,25 @@ public class ShortestPath<V> {
 	 * @return kürzester Weg als Liste von Knoten.
 	 */
 	public List<V> getShortestPath() {
+
 		List<V> shortestPath = new ArrayList<>();
 		V aktuell = endNode;
 
 		boolean weitermachen = true;
+
 		while (weitermachen) {
+
 			if (aktuell == startNode) {
 				weitermachen = false;
 			}
 			shortestPath.add(aktuell);
 			aktuell = pred.get(aktuell);
 		}
+
 		Collections.reverse(shortestPath);
 		return shortestPath;
 	}
+
 
 	/**
 	 * Liefert die Länge eines kürzesten Weges von Startknoten s nach Zielknoten g zurück.
@@ -122,21 +128,28 @@ public class ShortestPath<V> {
 		double distance = dist.get(endNode);
 		return distance;
 	}
-	//..
+
 
 	private void dijkstra(V s, V g){
+
 		for(var v : graph.getVertexSet()){
 			dist.put(v, Double.MAX_VALUE);
 			pred.put(v, null);
 		}
+
 		dist.put(s,0.);
 		cand.add(s,0.);
+
 		while(!cand.isEmpty()){
+
 			double d = cand.getMinValue();
 			V v = cand.removeMin();
+
 			for(var w : graph.getSuccessorVertexSet(v)){
+
 				double newdistance = dist.get(v) + graph.getWeight(v,w);
-				if(dist.get(w) == Double.MAX_VALUE){
+
+				if (dist.get(w) == Double.MAX_VALUE){
 					pred.put(w,v);
 					dist.put(w, newdistance);
 					cand.add(w,newdistance);
@@ -146,33 +159,46 @@ public class ShortestPath<V> {
 					cand.change(w, newdistance);
 				}
 			}
+			System.out.println("Besuche Knoten " + v + " mit d = " + dist.get(v));
 		}
 	}
 
+
 	private boolean astar(V s, V g){
-		for(var v : graph.getVertexSet()){
+
+		for (var v : graph.getVertexSet()){
 			dist.put(v, Double.MAX_VALUE);
 			pred.put(v, null);
 		}
+
 		dist.put(s,0.);
 		cand.add(s,0. + heur.estimatedCost(s,g));
 
-		while(!cand.isEmpty()){
+		while (!cand.isEmpty()){
+
 			double d = cand.getMinValue();
 			V v = cand.removeMin();
-			if(s == g) return true;
-			for(var w : graph.getSuccessorVertexSet(v)){
+
+			if (s == g) {return true;}
+
+			for (var w : graph.getSuccessorVertexSet(v)){
+
 				double newdistance = dist.get(v) + graph.getWeight(v,w);
-				if(dist.get(w) == Double.MAX_VALUE){
+
+				if (dist.get(w) == Double.MAX_VALUE){
 					pred.put(w,v);
 					dist.put(w, newdistance);
 					cand.add(w,newdistance + heur.estimatedCost(s,g));
+
 				} else if (newdistance < dist.get(w)) {
 					pred.put(w,v);
 					dist.put(w, newdistance);
 					cand.change(w, newdistance + heur.estimatedCost(s,g));
 				}
 			}
+
+			System.out.println("Besuche Knoten " + v + " mit d = " + dist.get(v));
+
 		}
 		return false;
 	}

@@ -118,11 +118,13 @@ public class ExampleGraph {
 		// Besuche Knoten 6 mit d = 15.07768723046357
 		// Shortest Path = [3, 7, 8, 6] Distance = 15.07768723046357
 
-		/* TODO
+		/* TODO Teil1
 		*   Ausgabe korrigieren: Shortest Path (SearchShortestPath-Funktion) soll Ausgaben wie in main() erzeugen
 		*
-		*	dazu vermutlich dijkstra und astern methoden beide in eine Funktion bringen
-		* 		also nur die distanz-unterschiede (blaue Zeilen in der Folie) unterschiedlich zuweisen.
+		*	TODO Teil1
+		*  	Prioritätslistentyp class IndexMinPQ genau anschauen und verstehen
+		*
+		*
 		*
 		*/
 	}	
