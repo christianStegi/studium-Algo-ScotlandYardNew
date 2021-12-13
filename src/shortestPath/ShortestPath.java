@@ -179,7 +179,10 @@ public class ShortestPath<V> {
 //			double d = cand.getMinValue();
 			V v = cand.removeMin();
 
-			if (v == g) {return true;}
+			if (v == g) {
+				System.out.println("Besuche Knoten " + v + " mit d = " + dist.get(v));
+				return true;
+			}
 
 			for (var w : graph.getSuccessorVertexSet(v)){
 
