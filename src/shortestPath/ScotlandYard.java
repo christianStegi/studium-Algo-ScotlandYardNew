@@ -74,8 +74,10 @@ public class ScotlandYard {
 			Heuristic<Point> heuristic = (v,w) -> dist(v,w);
 			double weight = heuristic.estimatedCost((knotenMap.get(knotenV)), knotenMap.get(knotenW));
 
-			System.out.println("knotenV: " + knotenV + ", knotenV: " + knotenW + ", weight: " + weight);
-			System.out.println();
+//			weight = 1;
+
+//			System.out.println("knotenV: " + knotenV + ", knotenV: " + knotenW + ", weight: " + weight);
+//			System.out.println();
 
 			sy_graph.addEdge(knotenV, knotenW, weight);
 			sy_graph.addEdge(knotenW, knotenV, weight);
@@ -97,15 +99,10 @@ public class ScotlandYard {
 
 
 	private static double dist(Point v, Point w) {
-		System.out.println("Point v: v.x: " + v.x + ", v.y: " + v.y);
-		System.out.println("Point w: w.x: " + w.x + ", w.y: " + w.y);
+//		System.out.println("Point v: v.x: " + v.x + ", v.y: " + v.y);
+//		System.out.println("Point w: w.x: " + w.x + ", w.y: " + w.y);
 
-//		double result = Math.sqrt((v.x-w.x)*(v.x-w.x) + (v.y-w.y)*(v.y-w.y));
-		double result = ((v.x-w.x)*(v.x-w.x) + (v.y-w.y)*(v.y-w.y));
-//		System.out.println("result vor der Wurzel: " + result);
-		result = Math.sqrt(result);
-		System.out.println("result: " + result);
-		return result;
+		return Math.sqrt((v.x-w.x)*(v.x-w.x) + (v.y-w.y)*(v.y-w.y));
 	}
 
 
@@ -140,13 +137,13 @@ public class ScotlandYard {
 		ShortestPath<Integer> sySp = new ShortestPath<Integer>(syGraph,syHeuristic);
 
 		sySp.searchShortestPath(65,157);
-		System.out.println("Distance = " + sySp.getDistance()); // 9.0
+		System.out.println("Distance (s: 65, g: 157)= " + sySp.getDistance()); // 9.0
 
 		sySp.searchShortestPath(1,175);
-		System.out.println("Distance = " + sySp.getDistance()); // 25.0
+		System.out.println("Distance (s: 1, g: 175)= " + sySp.getDistance()); // 25.0
 
 		sySp.searchShortestPath(1,173);
-		System.out.println("Distance = " + sySp.getDistance()); // 22.0
+		System.out.println("Distance (s: 1, g: 173)= " + sySp.getDistance()); // 22.0
 
 
 		SYSimulation sim;
