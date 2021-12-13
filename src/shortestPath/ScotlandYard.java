@@ -40,7 +40,10 @@ public class ScotlandYard {
 		File file =new File("src/shortestPath/ScotlandYard_Kanten.txt");
 		Scanner in = new Scanner(file);
 
-		// ...
+		while (in.hasNext()) {
+			String line = in.nextLine();
+			String[] wordsPerLine = line.split(" ");
+		}
 		
 		// Test, ob alle Kanten eingelesen wurden: 
 		System.out.println("Number of Vertices:       " + sy_graph.getNumberOfVertexes());	// 199
