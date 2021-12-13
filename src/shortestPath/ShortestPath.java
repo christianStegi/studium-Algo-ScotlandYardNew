@@ -198,8 +198,6 @@ public class ShortestPath<V> {
 				}
 			}
 
-
-
 		}
 		return false;
 	}
