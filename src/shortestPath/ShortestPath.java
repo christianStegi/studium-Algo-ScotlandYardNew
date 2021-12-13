@@ -189,6 +189,7 @@ public class ShortestPath<V> {
 					pred.put(w,v);
 					dist.put(w, newdistance);
 					cand.add(w,newdistance + heur.estimatedCost(s,g));
+//					System.out.println("Besuche Knoten " + v + " mit d = " + dist.get(v));
 
 				} else if (newdistance < dist.get(w)) {
 					pred.put(w,v);
@@ -197,7 +198,7 @@ public class ShortestPath<V> {
 				}
 			}
 
-			System.out.println("Besuche Knoten " + v + " mit d = " + dist.get(v));
+
 
 		}
 		return false;
