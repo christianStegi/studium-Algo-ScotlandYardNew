@@ -38,7 +38,6 @@ public class ScotlandYard {
 
 		DirectedGraph<Integer> sy_graph = new AdjacencyListDirectedGraph<>();
 		File file =new File("src/shortestPath/ScotlandYard_Kanten.txt");
-		System.out.println(file.getAbsolutePath());
 		Scanner in = new Scanner(file);
 
 		// ...
