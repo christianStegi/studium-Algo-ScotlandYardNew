@@ -176,28 +176,27 @@ public class ShortestPath<V> {
 
 		while (!cand.isEmpty()){
 
-			double d = cand.getMinValue();
+//			double d = cand.getMinValue();
 			V v = cand.removeMin();
 
-			if (s == g) {return true;}
+			if (v == g) {return true;}
 
 			for (var w : graph.getSuccessorVertexSet(v)){
 
-				double newdistance = dist.get(v) + graph.getWeight(v,w);
+				double distance = dist.get(v) + heur.estimatedCost(v, w);
 
 				if (dist.get(w) == Double.MAX_VALUE){
 					pred.put(w,v);
-					dist.put(w, newdistance);
-					cand.add(w,newdistance + heur.estimatedCost(s,g));
-//					System.out.println("Besuche Knoten " + v + " mit d = " + dist.get(v));
+					dist.put(w, distance);
+					cand.add(w,distance + heur.estimatedCost(w,g));
 
-				} else if (newdistance < dist.get(w)) {
+				} else if (distance < dist.get(w)) {
 					pred.put(w,v);
-					dist.put(w, newdistance);
-					cand.change(w, newdistance + heur.estimatedCost(s,g));
+					dist.put(w, distance);
+					cand.change(w, distance + heur.estimatedCost(w,g));
 				}
 			}
-
+			System.out.println("Besuche Knoten " + v + " mit d = " + dist.get(v));
 		}
 		return false;
 	}
