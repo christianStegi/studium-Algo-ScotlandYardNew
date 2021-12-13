@@ -74,6 +74,9 @@ public class ScotlandYard {
 			Heuristic<Point> heuristic = (v,w) -> dist(v,w);
 			double weight = heuristic.estimatedCost((knotenMap.get(knotenV)), knotenMap.get(knotenW));
 
+			System.out.println("knotenV: " + knotenV + ", knotenV: " + knotenW + ", weight: " + weight);
+			System.out.println();
+
 			sy_graph.addEdge(knotenV, knotenW, weight);
 			sy_graph.addEdge(knotenW, knotenV, weight);
 		}
@@ -94,7 +97,15 @@ public class ScotlandYard {
 
 
 	private static double dist(Point v, Point w) {
-		return Math.sqrt((v.x-w.x)*(v.x-w.x) + (v.y-w.y)*(v.y-w.y));
+		System.out.println("Point v: v.x: " + v.x + ", v.y: " + v.y);
+		System.out.println("Point w: w.x: " + w.x + ", w.y: " + w.y);
+
+//		double result = Math.sqrt((v.x-w.x)*(v.x-w.x) + (v.y-w.y)*(v.y-w.y));
+		double result = ((v.x-w.x)*(v.x-w.x) + (v.y-w.y)*(v.y-w.y));
+//		System.out.println("result vor der Wurzel: " + result);
+		result = Math.sqrt(result);
+		System.out.println("result: " + result);
+		return result;
 	}
 
 
@@ -167,7 +178,6 @@ public class ScotlandYard {
 		}
 
         sim.stopSequence();
-
 
     }
 

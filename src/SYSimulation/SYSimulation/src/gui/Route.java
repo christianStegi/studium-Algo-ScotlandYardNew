@@ -1,6 +1,7 @@
-package gui;
+package SYSimulation.SYSimulation.src.gui;
 
 import java.awt.Color;
+import SYSimulation.SYSimulation.src.gui.Station;
 
 public class Route implements MapEntry {
 	private Station start;

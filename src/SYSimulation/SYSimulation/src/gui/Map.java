@@ -1,4 +1,4 @@
-package gui;
+package SYSimulation.SYSimulation.src.gui;
 
 import java.awt.Dimension;
 import java.awt.Graphics;

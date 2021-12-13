@@ -1,6 +1,9 @@
-package gui;
+package SYSimulation.SYSimulation.src.gui;
 
-import gui.Toolbar.ToolbarState;
+import SYSimulation.SYSimulation.src.gui.Toolbar.ToolbarState;
+import SYSimulation.SYSimulation.src.gui.Station;
+import SYSimulation.SYSimulation.src.gui.Toolbar;
+import SYSimulation.SYSimulation.src.gui.MapEntry;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -25,7 +28,7 @@ public class SimGUI extends JFrame implements Runnable,ActionListener,ChangeList
 	
 	private Map map;
 	private Toolbar tbar;
-	private TreeMap<Integer,Station> stations;
+	private TreeMap<Integer, Station> stations;
 	private Vector<MapEntry> mapEntries;
 	private Vector<MapEntry> mapEntriesReplay;
 	private Thread simThread;
@@ -44,6 +47,7 @@ public class SimGUI extends JFrame implements Runnable,ActionListener,ChangeList
 	
 	public SimGUI() throws IOException {
 		stations = new TreeMap<Integer, Station>();
+//		readStationsFromFile(this.getClass().getResource("src.SYSimulation.SYSimulation.src.gui.stations.txt").getPath());
 		readStationsFromFile(this.getClass().getResource("stations.txt").getPath());
 		mapEntries = new Vector<MapEntry>();
 		mapEntriesReplay = new Vector<MapEntry>();
