@@ -176,7 +176,6 @@ public class ShortestPath<V> {
 
 		while (!cand.isEmpty()){
 
-//			double d = cand.getMinValue();
 			V v = cand.removeMin();
 
 			if (v == g) {

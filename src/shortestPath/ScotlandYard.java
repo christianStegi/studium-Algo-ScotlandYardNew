@@ -37,7 +37,9 @@ public class ScotlandYard {
 	public static DirectedGraph<Integer> getGraph() throws FileNotFoundException {
 
 		DirectedGraph<Integer> sy_graph = new AdjacencyListDirectedGraph<>();
-		Scanner in = new Scanner(new File("ScotlandYard_Kanten.txt"));
+		File file =new File("src/shortestPath/ScotlandYard_Kanten.txt");
+		System.out.println(file.getAbsolutePath());
+		Scanner in = new Scanner(file);
 
 		// ...
 		
