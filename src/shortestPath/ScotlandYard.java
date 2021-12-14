@@ -72,7 +72,7 @@ public class ScotlandYard {
 //			Heuristic<Point> heuristic = (v,w) -> dist(v,w);
 //			double weight = heuristic.estimatedCost((knotenMap.get(knotenV)), knotenMap.get(knotenW));
 
-			System.out.println("knotenV: " + knotenV + ", knotenV: " + knotenW + ", weight: " + weight);
+//			System.out.println("knotenV: " + knotenV + ", knotenV: " + knotenW + ", weight: " + weight);
 
 			if(!sy_graph.containsEdge(knotenV, knotenW)) {
 				sy_graph.addEdge(knotenV, knotenW, weight);
