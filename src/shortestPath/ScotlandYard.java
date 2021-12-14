@@ -90,7 +90,7 @@ public class ScotlandYard {
 //			double weight = heuristic.estimatedCost((knotenMap.get(knotenV)), knotenMap.get(knotenW));
 
 
-//			System.out.println("knotenV: " + knotenV + ", knotenV: " + knotenW + ", weight: " + weight);
+			System.out.println("knotenV: " + knotenV + ", knotenV: " + knotenW + ", weight: " + weight);
 //			System.out.println();
 			if(!sy_graph.containsEdge(knotenV, knotenW)) {
 				sy_graph.addEdge(knotenV, knotenW, weight);
@@ -100,8 +100,6 @@ public class ScotlandYard {
 		}
 
 		inKanten.close();
-
-		System.out.println(sy_graph.getNumberOfVertexes());
 
 		// Test, ob alle Kanten eingelesen wurden: 
 		System.out.println("Number of Vertices:       " + sy_graph.getNumberOfVertexes());	// 199
@@ -164,35 +162,35 @@ public class ScotlandYard {
 		System.out.println("Distance (s: 1, g: 173)= " + sySp.getDistance()); // 22.0
 
 
-		SYSimulation sim;
-		try {
-			sim = new SYSimulation();
-		} catch (IOException e) {
-			e.printStackTrace();
-			return;
-		}
-		sySp.setSimulator(sim);
-		sim.startSequence("Shortest path from 1 to 173");
-
-		//sySp.searchShortestPath(65,157); // 9.0
-		//sySp.searchShortestPath(1,175); //25.0
-
-		sySp.searchShortestPath(1,173); //22.0
-		// bei Heuristik-Faktor von 1/10 wird nicht der optimale Pfad produziert.
-		// bei 1/30 funktioniert es.
-
-		System.out.println("Distance = " + sySp.getDistance());
-		List<Integer> sp = sySp.getShortestPath();
-
-		int a = -1;
-		for (int b : sp) {
-			if (a != -1)
-			sim.drive(a, b, Color.RED.darker());
-			sim.visitStation(b);
-			a = b;
-		}
-
-        sim.stopSequence();
+//		SYSimulation sim;
+//		try {
+//			sim = new SYSimulation();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//			return;
+//		}
+//		sySp.setSimulator(sim);
+//		sim.startSequence("Shortest path from 1 to 173");
+//
+//		//sySp.searchShortestPath(65,157); // 9.0
+//		//sySp.searchShortestPath(1,175); //25.0
+//
+//		sySp.searchShortestPath(1,173); //22.0
+//		 bei Heuristik-Faktor von 1/10 wird nicht der optimale Pfad produziert.
+//		 bei 1/30 funktioniert es.
+//
+//		System.out.println("Distance = " + sySp.getDistance());
+//		List<Integer> sp = sySp.getShortestPath();
+//
+//		int a = -1;
+//		for (int b : sp) {
+//			if (a != -1)
+//			sim.drive(a, b, Color.RED.darker());
+//			sim.visitStation(b);
+//			a = b;
+//		}
+//
+//        sim.stopSequence();
 
     }
 

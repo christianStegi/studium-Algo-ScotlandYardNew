@@ -82,11 +82,15 @@ public class ShortestPath<V> {
 		startNode = s;
 		endNode = g;
 
+		cand = new IndexMinPQ<>();
+
 		if(heur == null){
 			dijkstra(s,g);
 		} else {
 			astar(s,g);
 		}
+
+
 
 	}
 
@@ -140,7 +144,7 @@ public class ShortestPath<V> {
 		dist.put(s,0.);
 		cand.add(s,0.);
 
-		while(!cand.isEmpty()){
+		while (!cand.isEmpty()){
 
 			double d = cand.getMinValue();
 			V v = cand.removeMin();
@@ -159,7 +163,7 @@ public class ShortestPath<V> {
 					cand.change(w, newdistance);
 				}
 			}
-			System.out.println("Besuche Knoten " + v + " mit d = " + dist.get(v));
+//			System.out.println("Besuche Knoten " + v + " mit d = " + dist.get(v));
 		}
 	}
 
