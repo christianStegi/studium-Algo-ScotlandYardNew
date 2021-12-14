@@ -108,6 +108,9 @@ public class ShortestPath<V> {
 
 		boolean weitermachen = true;
 
+		/* läuft rückwärts vom Zielknoten bis zum Startknoten alle Vorgängerknoten
+		ab und legt die so besuchten Knoten in einer Liste ab */
+
 		while (weitermachen) {
 
 			if (aktuell == startNode) {
@@ -183,7 +186,7 @@ public class ShortestPath<V> {
 			V v = cand.removeMin();
 
 			if (v == g) {
-				System.out.println("Besuche Knoten " + v + " mit d = " + dist.get(v));
+//				System.out.println("Besuche Knoten " + v + " mit d = " + dist.get(v));
 				return true;
 			}
 
@@ -202,7 +205,7 @@ public class ShortestPath<V> {
 					cand.change(w, distance + heur.estimatedCost(w,g));
 				}
 			}
-			System.out.println("Besuche Knoten " + v + " mit d = " + dist.get(v));
+//			System.out.println("Besuche Knoten " + v + " mit d = " + dist.get(v));
 		}
 		return false;
 	}

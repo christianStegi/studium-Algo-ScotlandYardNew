@@ -41,25 +41,8 @@ public class ScotlandYard {
 		DirectedGraph<Integer> sy_graph = new AdjacencyListDirectedGraph<>();
 		File fileKanten =new File("src/shortestPath/ScotlandYard_Kanten.txt");
 		Scanner inKanten = new Scanner(fileKanten);
-//		File fileKnoten =new File("src/shortestPath/ScotlandYard_Knoten.txt");
-//		Scanner inKnoten = new Scanner(fileKnoten);
-
-//		Map<Integer, Point> knotenMap = new TreeMap<>();
 		double weight;
-		/* hier Knoten aus Datei in eine Datenstruktur einlesen */
-//		while ( inKnoten.hasNext() ) {
-//
-//			String lineKnoten = inKnoten.nextLine();
-			/* splitte die Zeilen entweder bei \t oder einem Leerzeichen */
-//			String[] knotenPerLine = lineKnoten.split("(\t| )");
-//			int knoten = Integer.parseInt(knotenPerLine[0]);
-//			int coord_x = Integer.parseInt(knotenPerLine[1]);
-//			int coord_y = Integer.parseInt(knotenPerLine[2]);
 
-//			Point coordinaten = new Point(coord_x, coord_y);
-//			knotenMap.put(knoten, coordinaten);
-//
-//		}
 
 		/* hier Kanten aus Datei auslesen und zum graph hinzufügen */
 		while ( inKanten.hasNext() ) {
@@ -89,9 +72,8 @@ public class ScotlandYard {
 //			Heuristic<Point> heuristic = (v,w) -> dist(v,w);
 //			double weight = heuristic.estimatedCost((knotenMap.get(knotenV)), knotenMap.get(knotenW));
 
-
 			System.out.println("knotenV: " + knotenV + ", knotenV: " + knotenW + ", weight: " + weight);
-//			System.out.println();
+
 			if(!sy_graph.containsEdge(knotenV, knotenW)) {
 				sy_graph.addEdge(knotenV, knotenW, weight);
 				sy_graph.addEdge(knotenW, knotenV, weight);
@@ -111,14 +93,6 @@ public class ScotlandYard {
 		System.out.println("Sum of all Weights:       " + wSum);	// 1972.0
 		
 		return sy_graph;
-	}
-
-
-	private static double dist(Point v, Point w) {
-//		System.out.println("Point v: v.x: " + v.x + ", v.y: " + v.y);
-//		System.out.println("Point w: w.x: " + w.x + ", w.y: " + w.y);
-
-		return Math.sqrt((v.x-w.x)*(v.x-w.x) + (v.y-w.y)*(v.y-w.y));
 	}
 
 
@@ -147,8 +121,8 @@ public class ScotlandYard {
 
 		DirectedGraph<Integer> syGraph = getGraph();
 
-		Heuristic<Integer> syHeuristic = null; // Dijkstra
-		//Heuristic<Integer> syHeuristic = getHeuristic(); // A*
+//		Heuristic<Integer> syHeuristic = null; // Dijkstra
+		Heuristic<Integer> syHeuristic = getHeuristic(); // A*
 
 		ShortestPath<Integer> sySp = new ShortestPath<Integer>(syGraph,syHeuristic);
 
@@ -210,12 +184,42 @@ class ScotlandYardHeuristic implements Heuristic<Integer> {
 
 	public ScotlandYardHeuristic() throws FileNotFoundException {
 		// ...
+		File fileKnoten =new File("src/shortestPath/ScotlandYard_Knoten.txt");
+		Scanner inKnoten = new Scanner(fileKnoten);
+
+		Map<Integer, Point> knotenMap = new TreeMap<>();
+
+		/* hier Knoten aus Datei in eine Datenstruktur einlesen */
+		while ( inKnoten.hasNext() ) {
+
+			String lineKnoten = inKnoten.nextLine();
+		/* splitte die Zeilen entweder bei \t oder einem Leerzeichen */
+			String[] knotenPerLine = lineKnoten.split("(\t| )");
+			int knoten = Integer.parseInt(knotenPerLine[0]);
+			int coord_x = Integer.parseInt(knotenPerLine[1]);
+			int coord_y = Integer.parseInt(knotenPerLine[2]);
+
+			Point coordinaten = new Point(coord_x, coord_y);
+			knotenMap.put(knoten, coordinaten);
+		}
+
+//		Heuristic<Point> heuristic = (v,w) -> dist(v,w);
+//		double weight = heuristic.estimatedCost((knotenMap.get(knotenV)), knotenMap.get(knotenW));
+
 	}
+
 
 	public double estimatedCost(Integer u, Integer v) {
 		// ...
+//		return Math.sqrt((v.x-w.x)*(v.x-w.x) + (v.y-w.y)*(v.y-w.y));
 		return 0.0;
 	}
+
+
+//	private static double dist(java.awt.Point v, java.awt.Point w) {
+//		return Math.sqrt((v.x-w.x)*(v.x-w.x) + (v.y-w.y)*(v.y-w.y));
+//	}
+
 }
 
 
