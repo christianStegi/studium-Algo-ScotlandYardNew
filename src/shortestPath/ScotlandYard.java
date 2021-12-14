@@ -41,25 +41,25 @@ public class ScotlandYard {
 		DirectedGraph<Integer> sy_graph = new AdjacencyListDirectedGraph<>();
 		File fileKanten =new File("src/shortestPath/ScotlandYard_Kanten.txt");
 		Scanner inKanten = new Scanner(fileKanten);
-		File fileKnoten =new File("src/shortestPath/ScotlandYard_Knoten.txt");
-		Scanner inKnoten = new Scanner(fileKnoten);
+//		File fileKnoten =new File("src/shortestPath/ScotlandYard_Knoten.txt");
+//		Scanner inKnoten = new Scanner(fileKnoten);
 
-		Map<Integer, Point> knotenMap = new TreeMap<>();
-
+//		Map<Integer, Point> knotenMap = new TreeMap<>();
+		double weight;
 		/* hier Knoten aus Datei in eine Datenstruktur einlesen */
-		while ( inKnoten.hasNext() ) {
-
-			String lineKnoten = inKnoten.nextLine();
+//		while ( inKnoten.hasNext() ) {
+//
+//			String lineKnoten = inKnoten.nextLine();
 			/* splitte die Zeilen entweder bei \t oder einem Leerzeichen */
-			String[] knotenPerLine = lineKnoten.split("(\t| )");
-			int knoten = Integer.parseInt(knotenPerLine[0]);
-			int coord_x = Integer.parseInt(knotenPerLine[1]);
-			int coord_y = Integer.parseInt(knotenPerLine[2]);
+//			String[] knotenPerLine = lineKnoten.split("(\t| )");
+//			int knoten = Integer.parseInt(knotenPerLine[0]);
+//			int coord_x = Integer.parseInt(knotenPerLine[1]);
+//			int coord_y = Integer.parseInt(knotenPerLine[2]);
 
-			Point coordinaten = new Point(coord_x, coord_y);
-			knotenMap.put(knoten, coordinaten);
-
-		}
+//			Point coordinaten = new Point(coord_x, coord_y);
+//			knotenMap.put(knoten, coordinaten);
+//
+//		}
 
 		/* hier Kanten aus Datei auslesen und zum graph hinzufügen */
 		while ( inKanten.hasNext() ) {
@@ -71,17 +71,35 @@ public class ScotlandYard {
 			int knotenW = Integer.parseInt(kantenPerLine[1]);
 			String verkehrsmittel = kantenPerLine[2];
 
-			Heuristic<Point> heuristic = (v,w) -> dist(v,w);
-			double weight = heuristic.estimatedCost((knotenMap.get(knotenV)), knotenMap.get(knotenW));
+			switch (verkehrsmittel) {
+				case "Taxi":
+					weight = 2;
+					break;
+				case "Bus" :
+					weight = 3;
+					break;
+				case "UBahn":
+					weight = 5;
+					break;
+				default :
+					weight = 0;
+					System.out.println("Verkehrsmittel nicht erkannt");
+			}
 
-//			weight = 1;
+//			Heuristic<Point> heuristic = (v,w) -> dist(v,w);
+//			double weight = heuristic.estimatedCost((knotenMap.get(knotenV)), knotenMap.get(knotenW));
+
 
 //			System.out.println("knotenV: " + knotenV + ", knotenV: " + knotenW + ", weight: " + weight);
 //			System.out.println();
+			if(!sy_graph.containsEdge(knotenV, knotenW)) {
+				sy_graph.addEdge(knotenV, knotenW, weight);
+				sy_graph.addEdge(knotenW, knotenV, weight);
+			}
 
-			sy_graph.addEdge(knotenV, knotenW, weight);
-			sy_graph.addEdge(knotenW, knotenV, weight);
 		}
+
+		inKanten.close();
 
 		System.out.println(sy_graph.getNumberOfVertexes());
 
