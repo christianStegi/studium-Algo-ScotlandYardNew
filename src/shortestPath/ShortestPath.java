@@ -82,7 +82,7 @@ public class ShortestPath<V> {
 		startNode = s;
 		endNode = g;
 
-		cand = new IndexMinPQ<>();
+//		cand = new IndexMinPQ<>();
 
 		if(heur == null){
 			dijkstra(s,g);
@@ -139,6 +139,8 @@ public class ShortestPath<V> {
 
 	private void dijkstra(V s, V g){
 
+		cand.clear();
+
 		for(var v : graph.getVertexSet()){
 			dist.put(v, Double.MAX_VALUE);
 			pred.put(v, null);
@@ -173,6 +175,8 @@ public class ShortestPath<V> {
 
 	private boolean astar(V s, V g){
 
+		cand = new IndexMinPQ<>();
+
 		for (var v : graph.getVertexSet()){
 			dist.put(v, Double.MAX_VALUE);
 			pred.put(v, null);
@@ -182,18 +186,15 @@ public class ShortestPath<V> {
 		cand.add(s,0. + heur.estimatedCost(s,g));
 
 		while (!cand.isEmpty()){
-
 			V v = cand.removeMin();
-
 			if (v == g) {
 //				System.out.println("Besuche Knoten " + v + " mit d = " + dist.get(v));
+//				cand.clear();
+//				cand = new IndexMinPQ<>();
 				return true;
 			}
-
 			for (var w : graph.getSuccessorVertexSet(v)){
-
-				double distance = dist.get(v) + heur.estimatedCost(v, w);
-
+				double distance = dist.get(v) + graph.getWeight(v,w);
 				if (dist.get(w) == Double.MAX_VALUE){
 					pred.put(w,v);
 					dist.put(w, distance);
@@ -202,6 +203,11 @@ public class ShortestPath<V> {
 				} else if (distance < dist.get(w)) {
 					pred.put(w,v);
 					dist.put(w, distance);
+					System.out.println("v: " + v + ", w: " + w);
+
+					if ((int)v == 18 && (int)w == 31) {
+						System.out.println("jetzt!");
+					}
 					cand.change(w, distance + heur.estimatedCost(w,g));
 				}
 			}

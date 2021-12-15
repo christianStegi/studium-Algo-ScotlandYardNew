@@ -1,13 +1,10 @@
 package shortestPath;
 
-import java.awt.*;
 import java.io.FileNotFoundException;
 
 import shortestPath.directedGraph.*;
 import SYSimulation.SYSimulation.src.sim.SYSimulation;
 import SYSimulation.SYSimulation.src.sim.SYDemo;
-
-import java.io.IOException;
 
 import java.io.File;
 import java.util.List;
@@ -74,6 +71,8 @@ public class ScotlandYard {
 
 //			System.out.println("knotenV: " + knotenV + ", knotenV: " + knotenW + ", weight: " + weight);
 
+			/* TODO  Falls Knotenverbindungen unterschiedliche Beförderungsmittel gestatten, wird das billigste Beförderungsmittel gewählt */
+
 			if(!sy_graph.containsEdge(knotenV, knotenW)) {
 				sy_graph.addEdge(knotenV, knotenW, weight);
 				sy_graph.addEdge(knotenW, knotenV, weight);
@@ -121,8 +120,8 @@ public class ScotlandYard {
 
 		DirectedGraph<Integer> syGraph = getGraph();
 
-//		Heuristic<Integer> syHeuristic = null; // Dijkstra
-		Heuristic<Integer> syHeuristic = getHeuristic(); // A*
+		Heuristic<Integer> syHeuristic = null; // Dijkstra
+//		Heuristic<Integer> syHeuristic = getHeuristic(); // A*
 
 		ShortestPath<Integer> sySp = new ShortestPath<Integer>(syGraph,syHeuristic);
 
@@ -186,8 +185,7 @@ class ScotlandYardHeuristic implements Heuristic<Integer> {
 		// ...
 		File fileKnoten =new File("src/shortestPath/ScotlandYard_Knoten.txt");
 		Scanner inKnoten = new Scanner(fileKnoten);
-
-		Map<Integer, Point> knotenMap = new TreeMap<>();
+		coord = new TreeMap<>();
 
 		/* hier Knoten aus Datei in eine Datenstruktur einlesen */
 		while ( inKnoten.hasNext() ) {
@@ -199,8 +197,11 @@ class ScotlandYardHeuristic implements Heuristic<Integer> {
 			int coord_x = Integer.parseInt(knotenPerLine[1]);
 			int coord_y = Integer.parseInt(knotenPerLine[2]);
 
+//			System.out.println("knoten: " + knoten + ", coord_x: " + coord_x + ", coord_y: " + coord_y);
+
+
 			Point coordinaten = new Point(coord_x, coord_y);
-			knotenMap.put(knoten, coordinaten);
+			coord.put(knoten, coordinaten);
 		}
 
 //		Heuristic<Point> heuristic = (v,w) -> dist(v,w);
@@ -211,14 +212,16 @@ class ScotlandYardHeuristic implements Heuristic<Integer> {
 
 	public double estimatedCost(Integer u, Integer v) {
 		// ...
-//		return Math.sqrt((v.x-w.x)*(v.x-w.x) + (v.y-w.y)*(v.y-w.y));
-		return 0.0;
+
+//		Point s = coord.get(u);
+//		Point g = coord.get(v);
+//
+//		return Math.sqrt((s.x-g.x)*(s.x-g.x) + (s.y-g.y)*(s.y-g.y));
+
+		Point vp = coord.get(u);
+		Point wp = coord.get(v);
+		return Math.sqrt((vp.x-wp.x)*(vp.x-wp.x) + (vp.y-wp.y)*(vp.y-wp.y));
 	}
-
-
-//	private static double dist(java.awt.Point v, java.awt.Point w) {
-//		return Math.sqrt((v.x-w.x)*(v.x-w.x) + (v.y-w.y)*(v.y-w.y));
-//	}
 
 }
 
