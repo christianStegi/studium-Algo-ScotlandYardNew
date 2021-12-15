@@ -8,7 +8,9 @@ import SYSimulation.SYSimulation.src.sim.SYSimulation;
 import shortestPath.directedGraph.*;
 //import SYSimulation.SYSimulation.sim.*;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 // ...
 
@@ -149,10 +151,16 @@ public class ShortestPath<V> {
 		dist.put(s,0.);
 		cand.add(s,0.);
 
+
+
 		while (!cand.isEmpty()){
 
 			double d = cand.getMinValue();
 			V v = cand.removeMin();
+
+			if (sim != null) {
+				sim.visitStation((int) v, Color.green);
+			}
 
 			for(var w : graph.getSuccessorVertexSet(v)){
 
@@ -166,6 +174,15 @@ public class ShortestPath<V> {
 					pred.put(w,v);
 					dist.put(w, newdistance);
 					cand.change(w, newdistance);
+				}
+
+				if (sim != null) {
+					sim.drive((int) v, (int) w, Color.ORANGE);
+					sim.visitStation((int)w, Color.green);
+				}
+
+				if (v == g) {
+					return;
 				}
 			}
 //			System.out.println("Besuche Knoten " + v + " mit d = " + dist.get(v));
@@ -187,6 +204,11 @@ public class ShortestPath<V> {
 
 		while (!cand.isEmpty()){
 			V v = cand.removeMin();
+
+			if (sim != null) {
+				sim.visitStation((int) v, Color.green);
+			}
+
 			if (v == g) {
 //				System.out.println("Besuche Knoten " + v + " mit d = " + dist.get(v));
 //				cand.clear();
@@ -210,6 +232,12 @@ public class ShortestPath<V> {
 					}
 					cand.change(w, distance + heur.estimatedCost(w,g));
 				}
+
+				if (sim != null) {
+					sim.drive((int) v, (int) w, Color.ORANGE);
+					sim.visitStation((int)w, Color.green);
+				}
+
 			}
 //			System.out.println("Besuche Knoten " + v + " mit d = " + dist.get(v));
 		}

@@ -1,5 +1,6 @@
 package shortestPath;
 
+import java.awt.*;
 import java.io.FileNotFoundException;
 
 import shortestPath.directedGraph.*;
@@ -7,6 +8,7 @@ import SYSimulation.SYSimulation.src.sim.SYSimulation;
 import SYSimulation.SYSimulation.src.sim.SYDemo;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -120,50 +122,54 @@ public class ScotlandYard {
 
 		DirectedGraph<Integer> syGraph = getGraph();
 
-		Heuristic<Integer> syHeuristic = null; // Dijkstra
-//		Heuristic<Integer> syHeuristic = getHeuristic(); // A*
+//		Heuristic<Integer> syHeuristic = null; // Dijkstra
+		Heuristic<Integer> syHeuristic = getHeuristic(); // A*
 
 		ShortestPath<Integer> sySp = new ShortestPath<Integer>(syGraph,syHeuristic);
 
-		sySp.searchShortestPath(65,157);
-		System.out.println("Distance (s: 65, g: 157)= " + sySp.getDistance()); // 9.0
+//		sySp.searchShortestPath(65,157);
+//		System.out.println("Distance (s: 65, g: 157)= " + sySp.getDistance()); // 9.0
 
-		sySp.searchShortestPath(1,175);
-		System.out.println("Distance (s: 1, g: 175)= " + sySp.getDistance()); // 25.0
-
-		sySp.searchShortestPath(1,173);
-		System.out.println("Distance (s: 1, g: 173)= " + sySp.getDistance()); // 22.0
-
-
-//		SYSimulation sim;
-//		try {
-//			sim = new SYSimulation();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//			return;
-//		}
-//		sySp.setSimulator(sim);
-//		sim.startSequence("Shortest path from 1 to 173");
+//		sySp.searchShortestPath(1,175);
+//		System.out.println("Distance (s: 1, g: 175)= " + sySp.getDistance()); // 25.0
 //
-//		//sySp.searchShortestPath(65,157); // 9.0
-//		//sySp.searchShortestPath(1,175); //25.0
-//
+//		sySp.searchShortestPath(1,173);
+//		System.out.println("Distance (s: 1, g: 173)= " + sySp.getDistance()); // 22.0
+
+
+		SYSimulation sim;
+		try {
+			sim = new SYSimulation();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return;
+		}
+		sySp.setSimulator(sim);
+		sim.startSequence("Shortest path from 1 to 173");
+
+//		sySp.searchShortestPath(1,33);
+		sySp.searchShortestPath(1,100);
+
+//		sySp.searchShortestPath(65,157); // 9.0
+//		sySp.searchShortestPath(1,175); //25.0
+
 //		sySp.searchShortestPath(1,173); //22.0
 //		 bei Heuristik-Faktor von 1/10 wird nicht der optimale Pfad produziert.
 //		 bei 1/30 funktioniert es.
-//
-//		System.out.println("Distance = " + sySp.getDistance());
-//		List<Integer> sp = sySp.getShortestPath();
-//
-//		int a = -1;
-//		for (int b : sp) {
-//			if (a != -1)
-//			sim.drive(a, b, Color.RED.darker());
-//			sim.visitStation(b);
-//			a = b;
-//		}
-//
-//        sim.stopSequence();
+
+		System.out.println("Distance = " + sySp.getDistance());
+		List<Integer> sp = sySp.getShortestPath();
+
+		int a = -1;
+		for (int b : sp) {
+			if (a != -1) {
+				sim.drive(a, b, Color.RED.darker());
+			}
+			sim.visitStation(b);
+			a = b;
+		}
+
+        sim.stopSequence();
 
     }
 
