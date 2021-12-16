@@ -227,9 +227,6 @@ public class ShortestPath<V> {
 					dist.put(w, distance);
 					System.out.println("v: " + v + ", w: " + w);
 
-					if ((int)v == 18 && (int)w == 31) {
-						System.out.println("jetzt!");
-					}
 					cand.change(w, distance + heur.estimatedCost(w,g));
 				}
 
