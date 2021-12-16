@@ -73,18 +73,22 @@ public class ScotlandYard {
 
 //			System.out.println("knotenV: " + knotenV + ", knotenV: " + knotenW + ", weight: " + weight);
 
-			/* TODO  Falls Knotenverbindungen unterschiedliche Beförderungsmittel gestatten, wird das billigste Beförderungsmittel gewählt */
 
 			if(!sy_graph.containsEdge(knotenV, knotenW)) {
 				sy_graph.addEdge(knotenV, knotenW, weight);
 				sy_graph.addEdge(knotenW, knotenV, weight);
+			}else {
+				if(weight < sy_graph.getWeight(knotenV, knotenW)){
+					sy_graph.addEdge(knotenV, knotenW, weight);
+					sy_graph.addEdge(knotenW, knotenV, weight);
+				}
 			}
 
 		}
 
 		inKanten.close();
 
-		// Test, ob alle Kanten eingelesen wurden: 
+		// Test, ob alle Kanten eingelesen wurden:
 		System.out.println("Number of Vertices:       " + sy_graph.getNumberOfVertexes());	// 199
 		System.out.println("Number of directed Edges: " + sy_graph.getNumberOfEdges());	  	// 862
 		double wSum = 0.0;
@@ -92,7 +96,7 @@ public class ScotlandYard {
 			for (Integer w : sy_graph.getSuccessorVertexSet(v))
 				wSum += sy_graph.getWeight(v,w);
 		System.out.println("Sum of all Weights:       " + wSum);	// 1972.0
-		
+
 		return sy_graph;
 	}
 
@@ -127,29 +131,29 @@ public class ScotlandYard {
 
 		ShortestPath<Integer> sySp = new ShortestPath<Integer>(syGraph,syHeuristic);
 
-//		sySp.searchShortestPath(65,157);
-//		System.out.println("Distance (s: 65, g: 157)= " + sySp.getDistance()); // 9.0
+		sySp.searchShortestPath(65,157);
+		System.out.println("Distance (s: 65, g: 157)= " + sySp.getDistance()); // 9.0
 
-//		sySp.searchShortestPath(1,175);
-//		System.out.println("Distance (s: 1, g: 175)= " + sySp.getDistance()); // 25.0
-//
-//		sySp.searchShortestPath(1,173);
-//		System.out.println("Distance (s: 1, g: 173)= " + sySp.getDistance()); // 22.0
+		sySp.searchShortestPath(1,175);
+		System.out.println("Distance (s: 1, g: 175)= " + sySp.getDistance()); // 25.0
+
+		sySp.searchShortestPath(1,173);
+		System.out.println("Distance (s: 1, g: 173)= " + sySp.getDistance()); // 22.0
 
 
-		SYSimulation sim;
-		try {
-			sim = new SYSimulation();
-		} catch (IOException e) {
-			e.printStackTrace();
-			return;
-		}
-		sySp.setSimulator(sim);
-		sim.startSequence("Shortest path from 1 to 173");
+//		SYSimulation sim;
+//		try {
+//			sim = new SYSimulation();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//			return;
+//		}
+//		sySp.setSimulator(sim);
+//		sim.startSequence("Shortest path from 1 to 173");
 
 //		sySp.searchShortestPath(1,33);
-		sySp.searchShortestPath(1,100);
-
+//		sySp.searchShortestPath(1,100);
+//
 //		sySp.searchShortestPath(65,157); // 9.0
 //		sySp.searchShortestPath(1,175); //25.0
 
@@ -157,19 +161,19 @@ public class ScotlandYard {
 //		 bei Heuristik-Faktor von 1/10 wird nicht der optimale Pfad produziert.
 //		 bei 1/30 funktioniert es.
 
-		System.out.println("Distance = " + sySp.getDistance());
-		List<Integer> sp = sySp.getShortestPath();
+//		System.out.println("Distance = " + sySp.getDistance());
+//		List<Integer> sp = sySp.getShortestPath();
 
-		int a = -1;
-		for (int b : sp) {
-			if (a != -1) {
-				sim.drive(a, b, Color.RED.darker());
-			}
-			sim.visitStation(b);
-			a = b;
-		}
-
-        sim.stopSequence();
+//		int a = -1;
+//		for (int b : sp) {
+//			if (a != -1) {
+//				sim.drive(a, b, Color.RED.darker());
+//			}
+//			sim.visitStation(b);
+//			a = b;
+//		}
+//
+//        sim.stopSequence();
 
     }
 

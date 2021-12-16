@@ -181,7 +181,7 @@ public class ShortestPath<V> {
 					sim.visitStation((int)w, Color.green);
 				}
 
-				if (v == g) {
+				if (v.equals(g)) {
 					return;
 				}
 			}
@@ -209,7 +209,7 @@ public class ShortestPath<V> {
 				sim.visitStation((int) v, Color.green);
 			}
 
-			if (v == g) {
+			if (v.equals(g)) {
 //				System.out.println("Besuche Knoten " + v + " mit d = " + dist.get(v));
 //				cand.clear();
 //				cand = new IndexMinPQ<>();
